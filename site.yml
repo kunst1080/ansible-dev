@@ -1,16 +1,17 @@
 - hosts: all
   remote_user: "{{ user }}"
   vars:
-    - user: root
+    - user: user
     - user_home: "/home/{{ user }}"
     - workspace: "{{ user_home }}/work"
     - cache: "{{ user_home }}/.tmp"
+    - profile: "{{ user_home}}/.bash_profile"
     
   roles:
     - common
     - vim
-#    - linuxbrew
+    - linuxbrew
 #    - nodejs
 #    - rbenv
 #    - python
-#    - go
+

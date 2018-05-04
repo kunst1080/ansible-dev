@@ -1,8 +1,7 @@
 - name: install
+  become: yes
   apt:
     name: "{{ item }}"
     state: present
     update_cache: yes
-  with_items:
-    - git
-    - build-essential
+  with_items: "{{ packages }}"

@@ -1,0 +1,22 @@
+- name: git clone
+  git:
+    repo: "{{ remote.repo }}"
+    dest: "{{ dir }}"
+
+- name: set environments
+  lineinfile:
+    path: "{{ profile }}"
+    line: "{{ item }}"
+    create: true
+  with_items: "{{ envs }}"
+
+- name: brew tap
+  shell: "{{brew}} tap {{ item }}"
+  with_items: "{{ taps }}"
+
+- name: brew install
+  shell: "{{brew}} install {{ item }}"
+  with_items: "{{ packages }}"
+
+#- name: remove openssl
+#  shell: "{{brew}} uninstall --ignore-dependencies openssl"
