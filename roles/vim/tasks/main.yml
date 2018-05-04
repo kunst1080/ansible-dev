@@ -1,0 +1,17 @@
+- name: mkdir
+  file:
+    path: "{{ dir }}"
+    state: directory
+
+- name: clone plugin manager
+  git:
+    repo: "{{ remote.repo }}"
+    dest: "{{ repo }}"
+
+- name: get plugin manager installer
+  get_url:
+    url: "{{ remote.installer }}"
+    dest: "{{ installer }}"
+  
+- name: run plugin manager installer
+  shell: "sh {{ installer }} {{ dir }}"
