@@ -1,0 +1,21 @@
+- name: git clone
+  git:
+    repo: "{{ remote.repo }}"
+    dest: "{{ dir }}"
+
+- name: set environments
+  lineinfile:
+    path: "{{ profile }}"
+    line: "{{ item }}"
+    create: true
+  with_items: "{{ envs }}"
+
+- name: setup dotfiles
+  shell: "{{ setup_command }}"
+
+- name: make directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: "{{ dirs }}"
+

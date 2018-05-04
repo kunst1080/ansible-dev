@@ -1,0 +1,9 @@
+remote:
+  repo: https://github.com/kunst1080/dotfiles.git
+dir: "{{ cache }}/dotfiles"
+setup_command: "{{ dir }}/links.sh"
+envs:
+  - export GOPATH=~/work/go
+dirs:
+  - "{{ user_home }}/.vim/undo"
+  - "{{ user_home }}/.vim/tmp"
