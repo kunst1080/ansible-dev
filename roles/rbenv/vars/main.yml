@@ -1,0 +1,19 @@
+dir: "{{ cache }}/rbenv"
+remote_repos:
+  - repo: https://github.com/sstephenson/rbenv.git
+    dest: "{{ dir }}"
+  - repo: https://github.com/sstephenson/ruby-build.git
+    dest: "{{ dir }}/plugins/ruby-build"
+packages:
+  - libssl-dev
+  - libreadline-dev
+  - zlib1g-dev
+setup_commands:
+  - "eval '$({{ dir }}/bin/rbenv init -)'"
+  - rbenv install -v 2.4.1
+  - rbenv rehash
+  - rbenv global 2.4.1
+envs:
+  - "# RBENV"
+  - "export RBENV_ROOT={{ dir }}"
+  - export PATH=$RBENV_ROOT/bin:$PATH

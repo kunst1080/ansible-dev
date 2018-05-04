@@ -1,0 +1,25 @@
+- name: apt install
+  become: yes 
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes 
+  with_items: "{{ packages }}"
+
+- name: git clone
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ remote_repos }}"
+
+- name: set environments
+  lineinfile:
+    path: "{{ profile }}"
+    line: "{{ item }}"
+    create: true
+  with_items: "{{ envs }}"
+
+- name: setup commands
+  shell: "{{ item }}"
+  with_items: "{{ setup_commands }}"
+

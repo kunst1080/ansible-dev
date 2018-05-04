@@ -1,0 +1,19 @@
+- name: make directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: "{{ dirs }}"
+
+- name: set environments
+  lineinfile:
+    path: "{{ profile }}"
+    line: "{{ item }}"
+    create: true
+  with_items: "{{ envs }}"
+
+- name: setup commands
+  shell: "{{ item }}"
+  args:
+    chdir: "{{ nodebrew_root }}"
+  with_items: "{{ setup_commands }}"
+

@@ -1,0 +1,11 @@
+dir: "{{ cache }}/nodebrew"
+setup_commands:
+  - brew install nodebrew
+  - nodebrew setup_dirs
+  - nodebrew install-binary v6.10.3
+  - nodebrew use v6.10.3
+envs:
+  - "export NODEBREW_ROOT={{ dir }}"
+  - "export PATH=$NODEBREW_ROOT/current/bin:$PATH"
+dirs:
+  - "{{ dir }}"
