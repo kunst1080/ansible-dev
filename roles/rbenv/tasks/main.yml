@@ -1,25 +1,11 @@
-- name: apt install
-  become: yes 
-  apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes 
-  with_items: "{{ packages }}"
+- name: check rbenv
+  shell: "bash -lc 'which rbenv'"
+  register: exists
+  failed_when: false
 
-- name: git clone
-  git:
-    repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
-  with_items: "{{ remote_repos }}"
-
-- name: set environments
-  lineinfile:
-    path: "{{ profile }}"
-    line: "{{ item }}"
-    create: true
-  with_items: "{{ envs }}"
-
-- name: setup commands
-  shell: "{{ item }}"
-  with_items: "{{ setup_commands }}"
-
+- block:
+  - include: lib/apt-install.yml
+  - include: lib/git-clone.yml
+  - include: lib/set-environments.yml
+  - include: lib/execute-commands.yml
+  when: exists.rc != 0

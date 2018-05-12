@@ -1,0 +1,7 @@
+- name: make directories
+  file:
+    path: "{{ sub_item }}"
+    state: directory
+  with_items: "{{ dirs }}"
+  loop_control:
+    loop_var: sub_item

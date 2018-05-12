@@ -1,0 +1,5 @@
+- name: execute commands
+  shell: "bash -lc '{{ sub_item }}'"
+  with_items: "{{ commands }}"
+  loop_control:
+    loop_var: sub_item

@@ -12,7 +12,6 @@
     - dotfiles
     - vim
     - linuxbrew
-#    - nodejs
-#    - rbenv
-#    - python
-
+    - nodejs
+    - rbenv
+    - python

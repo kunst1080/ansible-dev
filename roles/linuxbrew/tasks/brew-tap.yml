@@ -1,0 +1,8 @@
+- name: check brew tap
+  shell: "bash -lc 'brew tap --list | grep {{ item }}'"
+  register: result
+  failed_when: result.rc not in [0, 1]
+
+- name: brew tap
+  shell: "bash -lc 'brew tap {{ item }}'"
+  when: result.rc == 1

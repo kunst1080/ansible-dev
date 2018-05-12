@@ -1,7 +1,13 @@
-remote:
-  repo: https://github.com/Shougo/dein.vim.git
-  installer: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
-
 dir: "{{ cache }}/vim"
-repo: "{{ dir }}/dein.vim"
 installer: "{{ dir }}/dein-installer.sh"
+
+remote_repos:
+  - repo: https://github.com/Shougo/dein.vim.git
+    dest: "{{ dir }}/dein.vim"
+remote_urls:
+  - url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+    dest: "{{ installer }}"
+commands:
+  - "sh {{ installer }} {{ dir }}"
+dirs:
+  - "{{ dir }}"

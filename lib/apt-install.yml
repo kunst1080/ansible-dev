@@ -1,0 +1,9 @@
+- name: apt install
+  become: yes 
+  apt:
+    name: "{{ sub_item }}"
+    state: present
+    update_cache: yes 
+  with_items: "{{ packages }}"
+  loop_control: 
+    loop_var: sub_item

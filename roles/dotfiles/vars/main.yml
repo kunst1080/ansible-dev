@@ -1,7 +1,10 @@
-remote:
-  repo: https://github.com/kunst1080/dotfiles.git
 dir: "{{ cache }}/dotfiles"
-setup_command: "{{ dir }}/links.sh"
+
+remote_repos:
+  - repo: https://github.com/kunst1080/dotfiles.git
+    dest: "{{ dir }}"
+commands:
+  - "{{ dir }}/links.sh"
 envs:
   - export GOPATH=~/work/go
 dirs:

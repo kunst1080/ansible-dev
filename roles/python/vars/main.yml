@@ -1,7 +1,11 @@
 dir: "{{ cache }}/venv"
-setup_commands:
+
+packages:
+  - python3-venv
+commands:
   - "python3 -m venv {{ dir }}"
 envs:
+  - "# Python"
   - ". {{ dir }}/bin/activate"
 dirs:
   - "{{ dir }}"

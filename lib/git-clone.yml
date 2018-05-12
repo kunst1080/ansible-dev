@@ -1,0 +1,7 @@
+- name: git clone
+  git:
+    repo: "{{ sub_item.repo }}"
+    dest: "{{ sub_item.dest }}"
+  with_items: "{{ remote_repos }}"
+  loop_control:
+    loop_var: sub_item

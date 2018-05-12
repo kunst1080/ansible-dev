@@ -1,17 +1,12 @@
-- name: mkdir
-  file:
-    path: "{{ dir }}"
-    state: directory
+- name: check dein
+  stat:
+    path: "{{ dir }}/dein.vim"
+  register: dein
 
-- name: clone plugin manager
-  git:
-    repo: "{{ remote.repo }}"
-    dest: "{{ repo }}"
+- block:
+  - include: lib/make-directories.yml
+  - include: lib/git-clone.yml
+  - include: lib/get-url.yml
+  - include: lib/execute-commands.yml
+  when: not dein.stat.exists
 
-- name: get plugin manager installer
-  get_url:
-    url: "{{ remote.installer }}"
-    dest: "{{ installer }}"
-  
-- name: run plugin manager installer
-  shell: "sh {{ installer }} {{ dir }}"

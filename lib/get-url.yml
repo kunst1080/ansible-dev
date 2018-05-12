@@ -1,0 +1,7 @@
+- name: git clone
+  get_url:
+    url: "{{ sub_item.url }}"
+    dest: "{{ sub_item.dest }}"
+  with_items: "{{ remote_urls }}"
+  loop_control:
+    loop_var: sub_item

@@ -1,0 +1,8 @@
+- name: set environments
+  lineinfile:
+    path: "{{ profile }}"
+    line: "{{ sub_item }}"
+    create: true
+  with_items: "{{ envs }}"
+  loop_control:
+    loop_var: sub_item

@@ -1,10 +1,18 @@
-remote:
-  repo: https://github.com/Linuxbrew/brew.git
 dir: "{{ cache }}/linuxbrew"
-brew: "{{ dir }}/bin/brew"
-taps:
+
+remote_repos:
+  - repo: https://github.com/Linuxbrew/brew.git
+    dest: "{{ dir }}"
+envs:
+  - "# Linuxbrew"
+  - "export PATH={{ dir }}/bin:$PATH"
+  - export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+  - export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+  - export LD_LIBRARY_PATH="$(brew --prefix)/lib:$LD_LIBRARY_PATH"
+
+brew_taps:
   - sachaos/todoist
-packages:
+brew_packages:
   - zsh
   - tmux
   - go
@@ -25,8 +33,3 @@ packages:
   - hugo
   - pwgen
   - todoist
-envs:
-  - "export PATH={{ dir }}/bin:$PATH"
-  - export MANPATH="$(brew --prefix)/share/man:$MANPATH"
-  - export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
-  - export LD_LIBRARY_PATH="$(brew --prefix)/lib:$LD_LIBRARY_PATH"
